@@ -1,0 +1,5 @@
+*
+!.gitignore
+!*.c
+!*.py
+!README.md
