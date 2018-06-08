@@ -1,14 +1,20 @@
 //ProjectEuler: Problem 1
 //Find the sum of all the multiples of 3 or 5 below 1000.
 #include <stdio.h>
+#include <time.h>
 
 #define LIMIT 1000
 
 int findSum(int limit);
 
 int main(void){
-    printf("The sum of all multiples of 3 or 5 below %d is: %d\n",
-	   LIMIT, findSum(LIMIT));
+    struct timespec start, stop;
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
+    findSum(LIMIT);
+    clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
+    double elapsed = (stop.tv_sec - start.tv_sec) * 1e6 + (stop.tv_nsec - start.tv_nsec) / 1e3;
+    printf("The sum of all multiples of 3 or 5 below %d is: %d\nResult obtained in: %.3f microseconds\n",
+	   LIMIT, findSum(LIMIT), elapsed);
     return 0;
 }
 
@@ -18,4 +24,3 @@ int findSum(int limit){
     for(int i = 5; i < limit; i+=5){ if(i%3) sum+=i; }
     return sum;
 }
-	
