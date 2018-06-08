@@ -1,5 +1,5 @@
 //ProjectEuler: Problem 1
-//Find the sume of all the multiples of 3 or 5 below 1000.
+//Find the sum of all the multiples of 3 or 5 below 1000.
 #include <stdio.h>
 
 #define LIMIT 1000
