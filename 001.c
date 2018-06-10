@@ -10,11 +10,11 @@ int findSum(int limit);
 int main(void){
     struct timespec start, stop;
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &start);
-    findSum(LIMIT);
+    int sum = findSum(LIMIT);
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
     double elapsed = (stop.tv_sec - start.tv_sec) * 1e6 + (stop.tv_nsec - start.tv_nsec) / 1e3;
     printf("The sum of all multiples of 3 or 5 below %d is: %d\nResult obtained in: %.3f microseconds\n",
-	   LIMIT, findSum(LIMIT), elapsed);
+	   LIMIT, sum, elapsed);
     return 0;
 }
 
