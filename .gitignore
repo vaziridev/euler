@@ -2,5 +2,6 @@
 !.gitignore
 !*.c
 !*.py
+!*.txt
 !README.md
 !logo.png
