@@ -6,6 +6,7 @@ import time
 def main():
     limit = 600851475143
     start = time.time()
+    #Using range instead of xrange has slowed this down by ~2x. Can be improved.
     for num in range(2,limit):
         if limit % num == 0:
             factor = limit / num
