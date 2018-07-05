@@ -3,20 +3,32 @@
 #include <stdio.h>
 #include <time.h>
 
+#define ROW 20
+#define COLUMN 20
+
 int main(){
     FILE *fp;
-    int number, number1;
+    int grid[ROW][COLUMN];
     
     fp = fopen("011-grid.txt", "r");
 
-    /* TODO:
-     * 1) Create 2D array (call it 'grid')
-     * 2) Allocate memory for grid to hold 20x20 ints
-     * 3) Read file line by line into grid
-     * 4) Close fp
-     * 5) Do grid arithmetic to find largest product of 4 adjacent
-     * 6) Return value
-     */
+    for(int row = 0; row < ROW; row++){
+	for(int column = 0; column < COLUMN; column++){
+	    fscanf(fp, "%2d", &grid[row][column]);
+	}
+    }
+    fclose(fp);
     
+    for(int row = 0; row < ROW; row++){
+	for(int column = 0; column < COLUMN; column++){
+	    printf("%02d ", grid[row][column]);
+	}
+	printf("\n");
+    }
+
+    /* TODO:
+     * 4) Do grid arithmetic to find largest product of 4 adjacent
+     * 5) Return value
+     */
     return 0;
 }
