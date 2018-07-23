@@ -27,32 +27,22 @@ int main(void){
     array.size = 50;
     getc(fp);
 
-    //loop through remaining lines
+    //Read remaining numbers, adding them to array.number
     for(i = 0; i < 99; ++i){
-    //Read line into local array
-        printf("Adding:\t");
-        for(j = 0; j < array.size - 50; j++){
-            printf(" ");
-        }
+        //Read next line into local array
         for(j = 0; j < 50; ++j){
             number[j] = getc(fp) - '0';
-            printf("%d", number[j]);
         }
         getc(fp);
-        printf("\nto:\t");
-        for(j = 0; j < array.size; ++j){
-            printf("%d", array.number[j]);
-        }
-        printf("\n");
-        
-        //Add arrays together
+        //Add 50 right-most digits
         carry = 0;
-        for(j = 49, k = array.size - 1; j >= 0; --j, --k){ //This loop adds local array to 50 right-most digits
+        for(j = 49, k = array.size - 1; j >= 0; --j, --k){
             sum = array.number[k] + number[j] + carry;
             array.number[k] = sum % 10;
             carry = sum / 10;
         }
-        for(j = array.size - 50; j > 0; --j){ //This loop adds the carry from local array to remaining left-most digits
+        //Add remaining digits
+        for(j = array.size - 50; j > 0; --j){ 
             sum = array.number[j-1] + carry;
             array.number[j-1] = sum % 10;
             carry = sum / 10;
@@ -60,8 +50,9 @@ int main(void){
         }
         //If carry remains, realloc
         if(carry){
-            int *temp = realloc(array.number, ++(array.size) * sizeof(int));
-            if(temp == NULL){ printf("Something went wrong during realloc\n"); }
+            int *temp = realloc(array.number,
+                                ++(array.size) * sizeof(int));
+            if(temp == NULL){ printf("Realloc error!\n"); }
             else{
                 array.number = temp;
                 //Shift digits +1 to the right
@@ -71,12 +62,7 @@ int main(void){
                 array.number[0] = carry;
             }
         }
-        printf("Result:\t");
-        for(j = 0; j < array.size; ++j){
-            printf("%d", array.number[j]);
-        }
-        printf("\n\n");
-    }//end for loop
+    }//end main for loop
     fclose(fp);
     
     //Output result
