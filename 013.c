@@ -22,60 +22,60 @@ int main(void){
     fp = fopen("013-number.txt", "r");
     array.number = (int *)malloc(sizeof(int) * 50);
     for(i = 0; i < 50; ++i){
-	fscanf(fp, "%1d", array.number+i);
+        fscanf(fp, "%1d", array.number+i);
     }
     array.size = 50;
     getc(fp);
 
     //loop through remaining lines
     for(i = 0; i < 99; ++i){
-	//Read line into local array
-	printf("Adding:\t");
-	for(j = 0; j < array.size - 50; j++){
-	    printf(" ");
-	}
-	for(j = 0; j < 50; ++j){
-	    number[j] = getc(fp) - '0';
-	    printf("%d", number[j]);
-	}
-	getc(fp);
-	printf("\nto:\t");
-	for(j = 0; j < array.size; ++j){
-	    printf("%d", array.number[j]);
-	}
-	printf("\n");
-	
-	//Add arrays together
-	carry = 0;
-	for(j = 49, k = array.size - 1; j >= 0; --j, --k){ //This loop adds local array to 50 right-most digits
-	    sum = array.number[k] + number[j] + carry;
-	    array.number[k] = sum % 10;
-	    carry = sum / 10;
-	}
-	for(j = array.size - 50; j > 0; --j){ //This loop adds the carry from local array to remaining left-most digits
-	    sum = array.number[j-1] + carry;
-	    array.number[j-1] = sum % 10;
-	    carry = sum / 10;
-	    if(!carry){ break; }
-	}
-	//If carry remains, realloc
-	if(carry){
-	    int *temp = realloc(array.number, ++(array.size) * sizeof(int));
-	    if(temp == NULL){ printf("Something went wrong during realloc\n"); }
-	    else{
-		array.number = temp;
-		//Shift digits +1 to the right
-		for(j = array.size - 1; j > 0; --j){
-		    array.number[j] = array.number[j-1];
-		}
-		array.number[0] = carry;
-	    }
-	}
-	printf("Result:\t");
-	for(j = 0; j < array.size; ++j){
-	    printf("%d", array.number[j]);
-	}
-	printf("\n\n");
+    //Read line into local array
+        printf("Adding:\t");
+        for(j = 0; j < array.size - 50; j++){
+            printf(" ");
+        }
+        for(j = 0; j < 50; ++j){
+            number[j] = getc(fp) - '0';
+            printf("%d", number[j]);
+        }
+        getc(fp);
+        printf("\nto:\t");
+        for(j = 0; j < array.size; ++j){
+            printf("%d", array.number[j]);
+        }
+        printf("\n");
+        
+        //Add arrays together
+        carry = 0;
+        for(j = 49, k = array.size - 1; j >= 0; --j, --k){ //This loop adds local array to 50 right-most digits
+            sum = array.number[k] + number[j] + carry;
+            array.number[k] = sum % 10;
+            carry = sum / 10;
+        }
+        for(j = array.size - 50; j > 0; --j){ //This loop adds the carry from local array to remaining left-most digits
+            sum = array.number[j-1] + carry;
+            array.number[j-1] = sum % 10;
+            carry = sum / 10;
+            if(!carry){ break; }
+        }
+        //If carry remains, realloc
+        if(carry){
+            int *temp = realloc(array.number, ++(array.size) * sizeof(int));
+            if(temp == NULL){ printf("Something went wrong during realloc\n"); }
+            else{
+                array.number = temp;
+                //Shift digits +1 to the right
+                for(j = array.size - 1; j > 0; --j){
+                    array.number[j] = array.number[j-1];
+                }
+                array.number[0] = carry;
+            }
+        }
+        printf("Result:\t");
+        for(j = 0; j < array.size; ++j){
+            printf("%d", array.number[j]);
+        }
+        printf("\n\n");
     }//end for loop
     fclose(fp);
     
@@ -84,7 +84,7 @@ int main(void){
     double elapsed = (stop.tv_sec - start.tv_sec) * 1e3 + (stop.tv_nsec - start.tv_nsec) / 1e6;
     printf("Found first 10 digits: ");
     for(i = 0; i < 10; ++i){
-	printf("%d", array.number[i]);
+        printf("%d", array.number[i]);
     }
     printf("\nSolved in %.3f microseconds\n", elapsed);
 
