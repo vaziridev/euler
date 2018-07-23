@@ -28,9 +28,12 @@ int main(void){
     getc(fp);
 
     //loop through remaining lines
-    for(i = 0; i < 49; ++i){
+    for(i = 0; i < 99; ++i){
 	//Read line into local array
 	printf("Adding:\t");
+	for(j = 0; j < array.size - 50; j++){
+	    printf(" ");
+	}
 	for(j = 0; j < 50; ++j){
 	    number[j] = getc(fp) - '0';
 	    printf("%d", number[j]);
@@ -51,6 +54,7 @@ int main(void){
 	}
 	for(j = array.size - 50; j > 0; --j){ //This loop adds the carry from local array to remaining left-most digits
 	    sum = array.number[j-1] + carry;
+	    array.number[j-1] = sum % 10;
 	    carry = sum / 10;
 	    if(!carry){ break; }
 	}
@@ -74,7 +78,7 @@ int main(void){
 	printf("\n\n");
     }//end for loop
     fclose(fp);
-        
+    
     //Output result
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
     double elapsed = (stop.tv_sec - start.tv_sec) * 1e3 + (stop.tv_nsec - start.tv_nsec) / 1e6;
