@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <time.h>
 
-#define SIZE 4 
+#define SIZE 21
 
 int main(){
+    //Note: Close to overflow, won't work for larger grids
     unsigned long long int triangle[SIZE][SIZE];
     //Timing variables, start timer
     struct timespec start, stop;
@@ -21,15 +22,7 @@ int main(){
 	}
 
     }
-
-    //Display grid
-    for(int i = 0; i < SIZE; ++i){
-	for(int j = 0; j < SIZE; ++j){
-	    printf("%d\t", triangle[j][i]);
-	}
-	printf("\n\n");
-    }
-
+    
     //Result output
     clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
     double elapsed = (stop.tv_sec - start.tv_sec) * 1e3 + (stop.tv_nsec - start.tv_nsec) / 1e6;
