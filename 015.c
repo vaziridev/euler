@@ -1,3 +1,6 @@
+/*ProjectEuler: Problem 15
+ *Find the number of routes to the bottom right corner
+ *of a 20x20 grid, only taking steps E or S. */
 #include <stdio.h>
 #include <time.h>
 
