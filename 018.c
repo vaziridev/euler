@@ -40,8 +40,10 @@ int main(void){
       //Debug output:
       printf("Bit of path #%d at position %d: %d\n",
             path, SIZE-1-i, checkBit(path, SIZE-2-i));
-      if(checkBit(path, SIZE-2-i)){ ++row; }
-      else{ ++col; }
+      if(!checkBit(path, SIZE-2-i)){ ++row; }
+      else{ ++row; ++col; }
+      //Debug output:
+      printf("Matrix[%d][%d]\n", row, col);
       printf("Sum = %d + %d\n", sum, matrix[row][col]);
       sum += matrix[row][col];
     }
@@ -79,9 +81,9 @@ void loadMatrix(int matrix[SIZE][SIZE]){
   int row, col, num;
   fp = fopen(FILENAME, "r");
   for(row=1; row<=SIZE; ++row){
-    for(col=1; col<=row; ++col){
+    for(col=row; col>=1; --col){
       fscanf(fp, "%2d", &num);
-      matrix[col-1][row-col] = num;
+      matrix[row-1][row-col] = num;
     }
   }
   fclose(fp);
@@ -90,8 +92,8 @@ void loadMatrix(int matrix[SIZE][SIZE]){
 void printMatrix(int matrix[SIZE][SIZE]){
   int row, col, num;
   for(row=1; row<=SIZE; ++row){
-    for(col=1; col<=row; ++col){
-      printf("%.2d ", matrix[col-1][row-col]);
+    for(col=row; col>=1; --col){
+      printf("Matrix[%d][%d]: %.2d ", row-1, row-col, matrix[row-1][row-col]);
     }
     printf("\n");
   }
