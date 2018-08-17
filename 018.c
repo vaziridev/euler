@@ -26,7 +26,6 @@ int main(void){
   loadMatrix(matrix);
   printMatrix(matrix);
   paths = totalPaths();
-  //printf("Total paths for triangle with %d rows is: %d\n\n", SIZE, paths);
 
   //Check each possible path
   for(path = 0; path < paths; ++path){
@@ -47,8 +46,7 @@ int main(void){
       championPath = path;
     }
   }
-
-  printf("\nChampion is %d!\nPath #%d\n", champion, championPath); //championPath to be used for later display
+  printf("\nChampion is %d!\nPath #%d\n", champion, championPath); //championPath will be used later for improved output
 
   //Report time elapsed
   clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &stop);
@@ -56,19 +54,6 @@ int main(void){
   printf("Solved in %.3f microseconds\n", elapsed);
   return 0;
 }
-  /*
-    Read file into array like so:
-	-before incrementing number, sum the numbers at each step (0 is left, 1 is right)
-	-a left equates to going down (up) 1 row but staying at the same column, right vice versa
-	-keep track of champion
-        -once you've hit 1111...111 and checked that path, you're ready to report result
-      -Then, take a break and start considering how this could be implemented with a binary tree,
-      and learn how to implement pruning as well.
-   */
-
-
-    
-
 
 void loadMatrix(int matrix[SIZE][SIZE]){
   FILE *fp;
